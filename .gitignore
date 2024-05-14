@@ -1,3 +1,5 @@
+#Entorno virtual
+venv
 #volumen postgres
 data
 
