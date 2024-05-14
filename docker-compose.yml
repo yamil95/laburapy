@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: django
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - PG_USER=admin
+      - PG_PASSWORD=admin
+      - PG_DB=yamil_db
+      - PG_HOST=db
+      - PG_PORT=5432
+    depends_on:
+      - db
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+  db:
+    image: postgres:14.10
+    restart: always
+    container_name: postgresql
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=yamil_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+  
+
