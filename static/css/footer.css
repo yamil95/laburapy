@@ -1,0 +1,56 @@
+/* Estilos para el pie de página */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-info,
+.links,
+.social-media {
+    flex: 1;
+}
+
+.contact-info h3,
+.links h3,
+.social-media h3 {
+    margin-bottom: 10px;
+}
+
+.links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.links ul li {
+    margin-bottom: 5px;
+}
+
+.links ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.social-media ul {
+    list-style-type: none;
+    display: flex;
+}
+
+.social-media ul li {
+    margin-right: 10px;
+}
+
+.social-media ul li a {
+    color: #fff;
+    text-decoration: none;
+}

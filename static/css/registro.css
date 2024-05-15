@@ -1,41 +1,31 @@
-/* Estilos CSS para el formulario de registro */
-/* Fuente moderna y diseño más atractivo */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
+/* Estilos mejorados para el formulario de registro */
 .form-container {
-    background-color: white;
-    padding: 40px;
-    border-radius: 12px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 300px;
+    max-width: 100%;
+    margin: 20px auto; /* Centrar el formulario */
 }
 
 h2 {
     text-align: center;
-    margin-bottom: 30px;
-    color: #333;
+    margin-bottom: 20px;
+    color: #555;
+    font-family: 'Poppins', sans-serif;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 label {
     display: block;
     font-weight: 600;
-    margin-bottom: 8px;
-    color: #555;
+    margin-bottom: 5px;
+    color: #777;
+    font-family: 'Poppins', sans-serif;
 }
 
 input[type="email"],
@@ -43,12 +33,14 @@ input[type="text"],
 input[type="password"],
 select {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
 }
 
 select {
@@ -59,12 +51,12 @@ select {
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 24px;
-    padding-right: 30px;
+    padding-right: 25px;
 }
 
 button[type="submit"] {
-    background-color: #007bff;
-    color: white;
+    background-color: #555;
+    color: #fff;
     padding: 12px 20px;
     border: none;
     border-radius: 6px;
@@ -76,5 +68,5 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #777;
 }
