@@ -13,6 +13,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     email = models.EmailField(unique=True)
+    dni = models.CharField('DNI', max_length=100)
     full_name = models.CharField('Nombres', max_length=100)
     profesion = models.CharField(
         'profesion',

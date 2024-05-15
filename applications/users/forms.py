@@ -31,6 +31,7 @@ class UserRegisterForm(forms.ModelForm):
         fields = (
             'email',
             'full_name',
+            'dni',
             'profesion',
             'genero',
         )
