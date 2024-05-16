@@ -12,8 +12,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('O', 'Otros'),
     )
 
+    MODE_CHOICES = (
+        ('S', 'solicitante'),
+        ('T', 'trabajador'),
+    )
+
     email = models.EmailField(unique=True)
-    dni = models.CharField('DNI', max_length=100)
+    dni = models.CharField('dni', max_length=100)
     full_name = models.CharField('Nombres', max_length=100)
     profesion = models.CharField(
         'profesion',
@@ -30,13 +35,19 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True
     )
+
     #
+    modo_usuario = models.CharField(
+        max_length=1, 
+        choices=MODE_CHOICES, 
+        blank=True
+    )
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ['full_name']
+    REQUIRED_FIELDS = ['full_name',"modo_usuario"]
 
     objects = UserManager()
 

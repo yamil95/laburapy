@@ -32,6 +32,7 @@ class UserRegisterForm(forms.ModelForm):
             'email',
             'full_name',
             'dni',
+            "modo_usuario",
             'profesion',
             'genero',
         )
