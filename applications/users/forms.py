@@ -38,6 +38,17 @@ class UserRegisterForm(forms.ModelForm):
 
     provincia = forms.ChoiceField(choices=choices_provincia, required=False)
     localidad = forms.ChoiceField(choices= [], required=False)
+    
+    date_birth = forms.DateField(
+        label='Fecha de nacimiento',
+        widget=forms.DateInput(
+            attrs={
+                'type': 'date',
+                'class': 'form-control',
+                'placeholder': 'Fecha de nacimiento'
+            }
+        )
+    )
     class Meta:
         """Meta definition for Userform."""
 
@@ -49,7 +60,10 @@ class UserRegisterForm(forms.ModelForm):
             "modo_usuario",
             'profesiones',
             'genero',
+            'date_birth'
         )
+
+    
     
     def clean(self):
         cleaned_data = super(UserRegisterForm,self).clean()
