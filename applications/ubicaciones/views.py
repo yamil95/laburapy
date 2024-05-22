@@ -11,6 +11,13 @@ import requests
 """
 
 """
+from django.http import JsonResponse
+
+def get_localidades(request, provincia_id):
+    localidades = Localidades.objects.filter(provincia_id=provincia_id)
+    data = [{'id': loc.id, 'nombre': loc.nombre} for loc in localidades]
+    return JsonResponse(data, safe=False)
+
 def cargar_provincias(request):
 
     # Realiza la consulta a la API externa

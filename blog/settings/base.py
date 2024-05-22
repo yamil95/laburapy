@@ -35,12 +35,16 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 )
 
 LOCAL_APPS = (
     'applications.users',
     'applications.review',
-    'applications.ubicaciones'
+    'applications.ubicaciones',
+    'applications.profesiones',
+    'applications.experiencia_profesional',
+    'applications.licitacion',
 )
 
 THIRD_PARTY_APPS = ()

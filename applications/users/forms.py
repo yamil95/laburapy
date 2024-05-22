@@ -2,9 +2,21 @@ from django import forms
 from django.contrib.auth import authenticate
 #
 from .models import User
+from applications.ubicaciones.models import (
+    Provincias,
+    Localidades,
+)
+
+def choices_provincia ():
+    provincias = Provincias.objects.all()
+    choices = [(provincia.id,provincia.nombre) for provincia in provincias]
+    return choices
+
+
 
 class UserRegisterForm(forms.ModelForm):
     
+
     password1 = forms.CharField(
         label='Contraseña',
         required=True,
@@ -24,6 +36,8 @@ class UserRegisterForm(forms.ModelForm):
         )
     )
 
+    provincia = forms.ChoiceField(choices=choices_provincia, required=False)
+    localidad = forms.ChoiceField(choices= [], required=False)
     class Meta:
         """Meta definition for Userform."""
 
@@ -33,7 +47,7 @@ class UserRegisterForm(forms.ModelForm):
             'full_name',
             'dni',
             "modo_usuario",
-            'profesion',
+            'profesiones',
             'genero',
         )
     

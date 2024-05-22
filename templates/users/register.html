@@ -32,6 +32,16 @@
             <label for="id_modo_usuario">Modo de uso:</label>
             {{ form.modo_usuario }}
         </div>
+
+        <div class="form-group">
+            <label for="id_provincia">Provincia:</label>
+            {{ form.provincia }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_localidad">localidad:</label>
+            {{ form.localidad }}
+        </div>
         
         <div class="form-group">
             <label for="id_genero">Género:</label>
@@ -51,4 +61,7 @@
         <button type="submit">Registrar</button>
     </form>
 </div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/ubicaciones.js' %}"></script>
 {% endblock %}

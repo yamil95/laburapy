@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from applications.users.models import User
+from django.contrib.auth import get_user_model
+from django.conf import settings
+User = get_user_model()
 # Create your models here.
 
 class Review (models.Model):
@@ -13,4 +15,4 @@ class Review (models.Model):
             MaxValueValidator(5)
         ]
     )
-    usuario = models.ForeignKey(User, verbose_name=("usuarios"), on_delete=models.CASCADE)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="review", on_delete=models.CASCADE)

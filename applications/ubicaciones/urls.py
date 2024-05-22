@@ -16,5 +16,9 @@ urlpatterns = [
         views.cargar_localidades,
         name='cargar-localidades',
     ),
+    path(
+        'get-localidades/<int:provincia_id>/',
+         views.get_localidades, 
+         name='get-localidades')
 
 ]
