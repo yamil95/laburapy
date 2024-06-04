@@ -1,0 +1,51 @@
+<!-- registro.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Página de Registro{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Página principal</h2>
+
+    <!-- Formulario de búsqueda -->
+    <form class="search-form">
+        <div class="form-group">
+            <input type="text" name="search" placeholder="Buscar profesión por nombre">
+        </div>
+        <div class="form-group">
+            <select name="provincia" placeholder="Seleccionar provincia">
+                <option value=".">provincia</option>
+                <option value="madrid">Madrid</option>
+                <option value="barcelona">Barcelona</option>
+                <option value="valencia">Valencia</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="localidad" placeholder="Seleccionar localidad">
+                <option value=".">localidad</option>
+                <option value="madrid">Madrid</option>
+                <option value="barcelona">Barcelona</option>
+                <option value="valencia">Valencia</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="genero" placeholder="Seleccionar género">
+                <option value=".">Genero</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+            </select>
+        </div>
+        <button type="submit" class="btn">Buscar</button>
+    </form>
+
+    <!-- Div para contener el resultado de la búsqueda -->
+    <div id="resultado-busqueda"></div>
+</div>
+
+{% endblock %}

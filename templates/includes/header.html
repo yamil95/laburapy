@@ -5,11 +5,20 @@
     <div class="header-container">
         <nav>
             <ul>
-                <li><a href="#">Inicio</a></li>
+                <li><a href="{% url 'home_app:pagina-inicio' %}">Inicio</a></li>
+                {% if request.user.is_authenticated %}
+                <!-- Mostrar contenido solo para usuarios autenticados -->
+                <li><a>Bienvenido, {{ request.user.email }}</a></li>
+                <li><a href="{% url 'users_app:user-logout' %}">Cerrar sesión</a></li>
                 <li><a href="#">Perfil</a></li>
                 <li><a href="#">Favoritos</a></li>
                 <li><a href="#">Trabajos publicados</a></li>
-                <li><a href="#">Contacto</a></li>
+              {% else %}
+                <!-- Mostrar contenido solo para usuarios no autenticados -->
+                <li><a href="{% url 'users_app:user-login' %}" > Iniciar sesión </a></li>
+                
+                <li><a href="{% url 'users_app:user-register' %}" > Registrarse </a></li>
+              {% endif %}
             </ul>
         </nav>
     </div>
