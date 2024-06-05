@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.urls import reverse_lazy, reverse
@@ -7,7 +8,8 @@ from django.http import HttpResponseRedirect
 
 from django.views.generic import (
     View,
-    CreateView
+    CreateView,
+    ListView
 )
 
 from django.views.generic.edit import (
@@ -18,6 +20,7 @@ from .forms import (
     UserRegisterForm, 
     LoginForm,
     UpdatePasswordForm,
+    SearchProfesionForm
 )
 #
 from .models import User
@@ -91,3 +94,8 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
 
         logout(self.request)
         return super(UpdatePasswordView, self).form_valid(form)
+
+
+
+
+    

@@ -13,33 +13,27 @@
 <div class="container">
     <h2>Página principal</h2>
 
-    <!-- Formulario de búsqueda -->
-    <form class="search-form">
+    <form method="post">
+        {% csrf_token %}
+        
         <div class="form-group">
-            <input type="text" name="search" placeholder="Buscar profesión por nombre">
+            <label for="id_profesion">Profesión:</label>
+            {{ form.profesiones }}
         </div>
+
         <div class="form-group">
-            <select name="provincia" placeholder="Seleccionar provincia">
-                <option value=".">provincia</option>
-                <option value="madrid">Madrid</option>
-                <option value="barcelona">Barcelona</option>
-                <option value="valencia">Valencia</option>
-            </select>
+            <label for="id_provincia">Provincia:</label>
+            {{ form.provincia }}
         </div>
+
         <div class="form-group">
-            <select name="localidad" placeholder="Seleccionar localidad">
-                <option value=".">localidad</option>
-                <option value="madrid">Madrid</option>
-                <option value="barcelona">Barcelona</option>
-                <option value="valencia">Valencia</option>
-            </select>
+            <label for="id_localidad">localidad:</label>
+            {{ form.localidad }}
         </div>
+        
         <div class="form-group">
-            <select name="genero" placeholder="Seleccionar género">
-                <option value=".">Genero</option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-            </select>
+            <label for="id_genero">Género:</label>
+            {{ form.genero }}
         </div>
         <button type="submit" class="btn">Buscar</button>
     </form>
@@ -48,4 +42,7 @@
     <div id="resultado-busqueda"></div>
 </div>
 
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/ubicaciones.js' %}"></script>
 {% endblock %}

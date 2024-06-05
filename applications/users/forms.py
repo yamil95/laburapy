@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 #
+from applications.profesiones.models import Profesion
 from .models import User
 from applications.ubicaciones.models import (
     Provincias,
@@ -123,3 +124,28 @@ class UpdatePasswordForm(forms.Form):
             }
         )
     )
+
+def choices_profesiones ():
+    profesiones = Profesion.objects.all()
+    choices = [(profesion.id,profesion.name)for profesion in profesiones]
+    return choices
+
+class SearchProfesionForm(forms.ModelForm):
+    
+
+
+    provincia = forms.ChoiceField(choices=choices_provincia, required=False)
+    localidad = forms.ChoiceField(choices= [], required=False)
+    profesiones = forms.ChoiceField (choices=choices_profesiones,required=True)
+
+
+    class Meta:
+        """Meta definition for Userform."""
+
+        model = User
+        fields = (
+            'profesiones',
+            'genero',
+            'provincia',
+            'localidad'
+        )

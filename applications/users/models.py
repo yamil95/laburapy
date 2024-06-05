@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from applications.profesiones.models import Profesion
 from applications.licitacion.models import Licitacion
+from applications.ubicaciones.models import Provincias,Localidades
 from django.conf import settings
 #
 from .managers import UserManager
@@ -23,6 +24,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     dni = models.CharField('dni', max_length=100)
     full_name = models.CharField('Nombres', max_length=100)
+    provincia = models.ForeignKey(Provincias, on_delete=models.CASCADE,default=1)
+    localidad = models.ForeignKey(Localidades, on_delete=models.CASCADE,default=1)
     profesiones = models.ManyToManyField(Profesion,related_name="profesiones")
     genero = models.CharField(
         max_length=1, 
@@ -48,7 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ['full_name',"modo_usuario"]
+    REQUIRED_FIELDS = ['full_name']
 
     objects = UserManager()
 
