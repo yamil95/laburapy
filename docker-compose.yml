@@ -1,11 +1,19 @@
 version: '3.8'
 
 services:
+
+  redis:
+    image: redis:latest
+    
+    ports:
+      - "6379:6379"
+
   web:
     build: .
     container_name: django
     volumes:
       - .:/app
+      - ./applications:/app/applications
     ports:
       - "8000:8000"
     environment:
@@ -14,10 +22,14 @@ services:
       - PG_DB=yamil_db
       - PG_HOST=db
       - PG_PORT=5432
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
     depends_on:
       - db
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
+      - redis
+    command: >
+        sh -c "until python3 manage.py migrate --noinput; do sleep 1; done &&
+        python3 manage.py runserver 0.0.0.0:8000"
   db:
     image: postgres:14.10
     restart: always
@@ -41,5 +53,21 @@ services:
       - "80:80"
     depends_on:
       - db
+  
+  celery:
+    container_name: celery_test
+    build:
+      context: ./celeryworker
+      dockerfile: Dockerfile
+    command: celery -A celerytask worker --loglevel=INFO 
+    volumes:
+      - ./celeryworker:/app/
+      - ./applications:/app/applications
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+      - web
   
 
