@@ -1,0 +1,18 @@
+!-- login.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block content %}
+
+    <div class="login-container">
+        <h2>Ingresar el codigo de verificacion</h2>
+        <form method="POST"> {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">validar</button>
+        </form>
+    </div>
+
+{% endblock %}

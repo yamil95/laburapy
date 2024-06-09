@@ -1,6 +1,6 @@
 from django.core.exceptions import ImproperlyConfigured
 import json
-
+import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from unipath import Path
@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).ancestor(3)
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open("secret.json") as f:
+with open(os.path.join(BASE_DIR, 'secret.json')) as f:
     secret = json.loads(f.read())
 
 def get_secret(secret_name, secrets=secret):

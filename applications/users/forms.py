@@ -3,15 +3,26 @@ from django.contrib.auth import authenticate
 #
 from applications.profesiones.models import Profesion
 from .models import User
+from applications.profesiones.models import Profesion
+
+from celery.result import AsyncResult
 from applications.ubicaciones.models import (
     Provincias,
-    Localidades,
+    
 )
+ 
+from applications.users.tasks import   tarea_celery
 
 def choices_provincia ():
     provincias = Provincias.objects.all()
     choices = [(provincia.id,provincia.nombre) for provincia in provincias]
     return choices
+
+def choices_profesiones ():
+    profesiones = Profesion.objects.all()
+    choices = [(profesion.id,profesion.name) for profesion in profesiones]
+    return choices
+
 
 
 
@@ -37,9 +48,7 @@ class UserRegisterForm(forms.ModelForm):
         )
     )
 
-    provincia = forms.ChoiceField(choices=choices_provincia, required=False)
-    localidad = forms.ChoiceField(choices= [], required=False)
-    
+
     date_birth = forms.DateField(
         label='Fecha de nacimiento',
         widget=forms.DateInput(
@@ -49,7 +58,13 @@ class UserRegisterForm(forms.ModelForm):
                 'placeholder': 'Fecha de nacimiento'
             }
         )
-    )
+    ) 
+    def enviar_codigo(self,celular,codigo):
+        
+        resultado = tarea_celery.delay(celular,codigo)
+        
+
+    
     class Meta:
         """Meta definition for Userform."""
 
@@ -57,11 +72,9 @@ class UserRegisterForm(forms.ModelForm):
         fields = (
             'email',
             'full_name',
-            'dni',
-            "modo_usuario",
-            'profesiones',
-            'genero',
-            'date_birth'
+            "dni",
+            "genero",
+            "celular"
         )
 
     
@@ -144,8 +157,32 @@ class SearchProfesionForm(forms.ModelForm):
 
         model = User
         fields = (
-            'profesiones',
             'genero',
             'provincia',
             'localidad'
         )
+        
+class VerificationForm(forms.Form):
+    
+    codigo = forms.CharField(max_length=6,required=True)    
+
+    def __init__(self, pk, *args, **kwargs):
+        self.id_user = pk
+        super(VerificationForm, self).__init__(*args, **kwargs)
+    
+    
+    def clean_codigo(self):
+        
+        codigo = self.cleaned_data["codigo"]
+        
+        if len(codigo) == 6:
+            activo = User.objects.validar_codigo(
+                self.id_user,
+                codigo
+            )
+            
+            if not activo:
+                raise forms.ValidationError("el codigo es incorrecto")
+
+        else:
+            raise forms.ValidationError("el codigo es incorrecto")

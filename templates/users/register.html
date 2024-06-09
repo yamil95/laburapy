@@ -24,30 +24,17 @@
         </div>
 
         <div class="form-group">
+            <label for="id_celular">Celular:</label>
+            {{ form.celular }}
+        </div>
+
+
+        <div class="form-group">
             <label for="id_date_birth">Fecha de nacimiento:</label>
             {{ form.date_birth }}
         </div>
         
-        <div class="form-group">
-            <label for="id_profesion">Profesión:</label>
-            {{ form.profesiones }}
-        </div>
 
-        <div class="form-group">
-            <label for="id_modo_usuario">Modo de uso:</label>
-            {{ form.modo_usuario }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_provincia">Provincia:</label>
-            {{ form.provincia }}
-        </div>
-
-        <div class="form-group">
-            <label for="id_localidad">localidad:</label>
-            {{ form.localidad }}
-        </div>
-        
         <div class="form-group">
             <label for="id_genero">Género:</label>
             {{ form.genero }}
@@ -66,7 +53,4 @@
         <button type="submit">Registrar</button>
     </form>
 </div>
-{% endblock %}
-{% block scripts %}
-<script src="{% static 'js/ubicaciones.js' %}"></script>
 {% endblock %}

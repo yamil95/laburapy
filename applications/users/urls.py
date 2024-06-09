@@ -1,6 +1,5 @@
 #
 from django.urls import path
-
 from . import views
 
 app_name = "users_app"
@@ -25,5 +24,10 @@ urlpatterns = [
         'update/', 
         views.UpdatePasswordView.as_view(),
         name='user-update',
+    ),
+        path(
+        'user-verification/<pk>/', 
+        views.VerificationCode.as_view(),
+        name='user-verification',
     ),
 ]

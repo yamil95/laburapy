@@ -17,3 +17,6 @@ __pycache__/
 *$py.class
 #Cache
 **/__pycache__/*.pyc
+
+#env_files
+**/env_*
