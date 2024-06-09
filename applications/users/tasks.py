@@ -3,9 +3,6 @@ from celery import shared_task
 import os
 from twilio.rest import Client
 
-
-
-
 @shared_task()
 def tarea_celery(celular,codigo):
     
