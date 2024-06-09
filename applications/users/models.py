@@ -24,9 +24,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     dni = models.CharField('dni', max_length=100)
     full_name = models.CharField('Nombres', max_length=100)
-    provincia = models.ForeignKey(Provincias, on_delete=models.CASCADE,default=1)
-    localidad = models.ForeignKey(Localidades, on_delete=models.CASCADE,default=1)
+    celular = models.CharField("celular",max_length=20,null=True)
+    provincia = models.ForeignKey(Provincias, on_delete=models.CASCADE,null=True)
+    localidad = models.ForeignKey(Localidades, on_delete=models.CASCADE,null=True)
     profesiones = models.ManyToManyField(Profesion,related_name="profesiones")
+    codigo_registro  = models.CharField("codigo verificacion", max_length=6,blank=True)
     genero = models.CharField(
         max_length=1, 
         choices=GENDER_CHOICES, 
@@ -47,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     licitaciones = models.ManyToManyField(Licitacion, through="Propuesta")
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
 
